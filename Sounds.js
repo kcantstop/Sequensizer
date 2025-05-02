@@ -22,7 +22,7 @@ const synth = new Tone.Synth().toDestination();
 let selectedNote = 'C4';
 
 
-// Piano event listeners this is based on the original get element but uses a for each function based on the key map 
+// Piano event listeners this is based on the original get element but uses a for each function based on the key map,Object.entries is making an array from the keymap that the function cycles through
 Object.entries(keyMap).forEach(([id, note]) => {
   document.getElementById(id).addEventListener('click', async () => {
       await Tone.start();
@@ -30,3 +30,17 @@ Object.entries(keyMap).forEach(([id, note]) => {
       synth.triggerAttackRelease(note, '8n');
     });
 })
+
+//This function created the sequencer visually 
+function createSequencer() {
+  const sequencer = document.getElementById('sequencer');
+  
+  //Iused a basic for loop to creat a <div sequencer-step div> 8 times this loop allows me to change how may steps I want quicker
+  for (let i = 0; i < 8; i++) {
+    const step = document.createElement('div'); //creates each <div>
+    step.className = 'sequencer-step';   //assigns the class 
+    sequencer.appendChild(step);     //adds the element "<div> class=equencer-step <div>" to the sequencer container 8 times
+  }
+}
+
+createSequencer();
